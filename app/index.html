@@ -1,0 +1,85 @@
+<html ng-app="weatherApp">
+    <head>
+        <title>My First Angular App!</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+		<script type="text/javascript" src="scripts/services/weather-service.js"></script>
+		<script type="text/javascript" src="scripts/controllers/weather-controller.js"></script>
+		<script type="text/javascript" src="scripts/directives/weather-directive.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap.min.css">
+	   </head>
+	<style>
+.parent {
+    border: 20px solid #676767;
+    padding : 20px;
+}
+.parent,.directive {
+    position: relative;
+}
+.parent:after,.directive:after {
+    display: inline;
+    color: #fff;
+    font-size: normal;
+    position: absolute;
+    top:-20px;
+    left:-20px;
+    z-index: 100;
+    padding: 1px 5px;
+    background-color: rgba(0,0,0,0.5);
+}
+.parent:after {
+    content: "MainCtrl Scope";
+}
+.directive {
+    padding: 20px;
+    border: 20px solid #cbccdd;
+    margin-top: 20px;
+}
+.directive:after {
+    content: "Directive Scope"
+}
+.line {
+    border-bottom: 1px dotted #ccc;
+    padding: 5px 0;
+}
+	</style>
+    <body>
+	<div ng-controller="weatherController">
+	<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="home">Home</a></li>
+        <li><a ui-sref="about">About</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+
+	 <div class="line">
+            Name inside parent scope is: <strong>{{name}}</strong>  
+            <input type="button" ng-click="reverseName()" value="Reverse name" />
+        </div> 
+        <div class="line">
+            Color inside parent scope is: <strong style="color:{{color}}">{{color|uppercase}}</strong>  
+            <input type="button" ng-click="randomColor()" value="Randomize color" />
+        </div>
+       
+        <div class="directive" weather
+		  name="{{name}}"
+          color="color"
+            reverse="reverseName()"
+		</div>
+		  
+	</div>
+    </body>
+</html>
